@@ -11,11 +11,14 @@ output: html_document
 library(tidyverse)
 library(moderndive)
 ```
+```{r, include=FALSE}
+Sys.setlocale(category = "LC_ALL",locale = "English_United States")
+```
 
 ## 2.Load data
 
 
-```{r cars}
+```{r }
 data("early_january_weather")
 ```
 
@@ -28,4 +31,9 @@ head(early_january_weather,20)
 ```
 
 This data set recorded the weather of EWR in 2013 from Jan 1 to Jan 15.The variables include `r names(early_january_weather)`.This data set includes `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns. From this data set, the average temperature of EWR is `r mean(early_january_weather$temp)`. Therefore, we can conclude that EWR is very hot from January 1 to January 15.
+
+Now we use scatter plot to show the trend of temperature and humid change in these 15 days
+```{r}
+ggplot(data = early_january_weather,aes(x=time_hour,y=temp))+geom_point(aes(color=humid))
+```
 
