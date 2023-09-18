@@ -38,3 +38,34 @@ ggplot(data = early_january_weather,aes(x=time_hour,y=temp))+geom_point(aes(colo
 ggsave("Plot1_HW1.jpg")
 ```
 
+# Problem 2
+
+The names of random normal sample, logical vector, character vector and factor vector are "nor_sam", "log_vec", "cha_vec", "fac_vec"
+```{r}
+nor_sam=rnorm(10)
+log_vec=nor_sam>0
+cha_vec=c("ch1","ch2","ch3","ch4","ch5","ch6","ch7","ch8","ch9","ch10")
+fac_vec=factor(c("easy","hard","normal","normal","hard","normal","hard","easy","hard","easy"))
+dt=tibble(nor_sam,log_vec,cha_vec,fac_vec)
+show(dt)
+```
+
+Next, I use "mean" function to calculate the mean of each variable
+```{r}
+mean(pull(dt,nor_sam))
+mean(pull(dt,log_vec))
+mean(pull(dt,cha_vec))
+mean(pull(dt,fac_vec))
+```
+Therefore, "mean" function works on random normal sample and logical vector, doesn't work on character vector and factor vector.
+
+Then, I will apply the "as.numeric" function to the logical, character, and factor variables, and try to calculate their mean. 
+```{r}
+as.numeric(log_vec)
+as.numeric(cha_vec)
+as.numeric(fac_vec)
+mean(as.numeric(log_vec))
+mean(as.numeric(cha_vec))
+mean(as.numeric(fac_vec))
+```
+Form the result,for the logical vector, "as.numeric" function will turn True into 1 and False into 0. For the factor vector, "as.numeric" function will transform different factors as increasing level, start as 1. Therefore, we can calculate their mean when we apply "as.numeric" function to logical vector and factor vector. However, "as.numeric" function doesn't work on character vector, we can not calculate the mean of a character vector.

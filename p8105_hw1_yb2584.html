@@ -410,6 +410,69 @@ change in these 15 days</p>
 <pre><code>## Saving 7 x 5 in image</code></pre>
 </div>
 </div>
+<div id="problem-2" class="section level1">
+<h1>Problem 2</h1>
+<p>The names of random normal sample, logical vector, character vector
+and factor vector are “nor_sam”, “log_vec”, “cha_vec”, “fac_vec”</p>
+<pre class="r"><code>nor_sam=rnorm(10)
+log_vec=nor_sam&gt;0
+cha_vec=c(&quot;ch1&quot;,&quot;ch2&quot;,&quot;ch3&quot;,&quot;ch4&quot;,&quot;ch5&quot;,&quot;ch6&quot;,&quot;ch7&quot;,&quot;ch8&quot;,&quot;ch9&quot;,&quot;ch10&quot;)
+fac_vec=factor(c(&quot;easy&quot;,&quot;hard&quot;,&quot;normal&quot;,&quot;normal&quot;,&quot;hard&quot;,&quot;normal&quot;,&quot;hard&quot;,&quot;easy&quot;,&quot;hard&quot;,&quot;easy&quot;))
+dt=tibble(nor_sam,log_vec,cha_vec,fac_vec)
+show(dt)</code></pre>
+<pre><code>## # A tibble: 10 x 4
+##    nor_sam log_vec cha_vec fac_vec
+##      &lt;dbl&gt; &lt;lgl&gt;   &lt;chr&gt;   &lt;fct&gt;  
+##  1   1.06  TRUE    ch1     easy   
+##  2  -0.654 FALSE   ch2     hard   
+##  3   0.629 TRUE    ch3     normal 
+##  4  -0.183 FALSE   ch4     normal 
+##  5   0.251 TRUE    ch5     hard   
+##  6  -0.871 FALSE   ch6     normal 
+##  7   0.733 TRUE    ch7     hard   
+##  8   0.166 TRUE    ch8     easy   
+##  9  -0.662 FALSE   ch9     hard   
+## 10  -0.187 FALSE   ch10    easy</code></pre>
+<p>Next, I use “mean” function to calculate the mean of each
+variable</p>
+<pre class="r"><code>mean(pull(dt,nor_sam))</code></pre>
+<pre><code>## [1] 0.02850904</code></pre>
+<pre class="r"><code>mean(pull(dt,log_vec))</code></pre>
+<pre><code>## [1] 0.5</code></pre>
+<pre class="r"><code>mean(pull(dt,cha_vec))</code></pre>
+<pre><code>## Warning in mean.default(pull(dt, cha_vec)): argument is not numeric or logical:
+## returning NA</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>mean(pull(dt,fac_vec))</code></pre>
+<pre><code>## Warning in mean.default(pull(dt, fac_vec)): argument is not numeric or logical:
+## returning NA</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>Therefore, “mean” function works on random normal sample and logical
+vector, doesn’t work on character vector and factor vector.</p>
+<p>Then, I will apply the “as.numeric” function to the logical,
+character, and factor variables, and try to calculate their mean.</p>
+<pre class="r"><code>as.numeric(log_vec)</code></pre>
+<pre><code>##  [1] 1 0 1 0 1 0 1 1 0 0</code></pre>
+<pre class="r"><code>as.numeric(cha_vec)</code></pre>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre><code>##  [1] NA NA NA NA NA NA NA NA NA NA</code></pre>
+<pre class="r"><code>as.numeric(fac_vec)</code></pre>
+<pre><code>##  [1] 1 2 3 3 2 3 2 1 2 1</code></pre>
+<pre class="r"><code>mean(as.numeric(log_vec))</code></pre>
+<pre><code>## [1] 0.5</code></pre>
+<pre class="r"><code>mean(as.numeric(cha_vec))</code></pre>
+<pre><code>## Warning in mean(as.numeric(cha_vec)): NAs introduced by coercion</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>mean(as.numeric(fac_vec))</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>Form the result,for the logical vector, “as.numeric” function will
+turn True into 1 and False into 0. For the factor vector, “as.numeric”
+function will transform different factors as increasing level, start as
+1. Therefore, we can calculate their mean when we apply “as.numeric”
+function to logical vector and factor vector. However, “as.numeric”
+function doesn’t work on character vector, we can not calculate the mean
+of a character vector.</p>
+</div>
 
 
 
