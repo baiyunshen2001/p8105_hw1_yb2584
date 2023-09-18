@@ -35,5 +35,6 @@ This data set recorded the weather of EWR in 2013 from Jan 1 to Jan 15.The varia
 Now we use scatter plot to show the trend of temperature and humid change in these 15 days
 ```{r}
 ggplot(data = early_january_weather,aes(x=time_hour,y=temp))+geom_point(aes(color=humid))
+ggsave("Plot1_HW1.jpg")
 ```
 
